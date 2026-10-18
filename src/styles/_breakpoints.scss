@@ -1,0 +1,10 @@
+// Sass variables because CSS custom properties cannot be used inside @media
+// conditions (see decision D-006). Used only by component stylesheets via
+// `@use '../../styles/breakpoints' as bp;`. Emits no CSS itself.
+//
+// Max-width values sit 1px below the next breakpoint so ranges never overlap:
+//   mobile  : 320px - 767px   (max-width: $mobile-max)
+//   tablet  : 768px - 1023px  (max-width: $tablet-max, overridden by mobile rules below it)
+//   desktop : 1024px and up   (no media query: the base styles)
+$mobile-max: 47.9375rem; // 767px
+$tablet-max: 63.9375rem; // 1023px

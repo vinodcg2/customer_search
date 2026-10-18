@@ -1,0 +1,36 @@
+@use './styles/breakpoints' as bp;
+
+.app {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4) var(--space-8);
+
+  &__title {
+    font-size: var(--font-size-2xl);
+  }
+
+  &__intro {
+    margin: var(--space-2) 0 var(--space-5);
+    color: var(--color-text-muted);
+  }
+}
+
+@media (max-width: bp.$tablet-max) {
+  .app {
+    padding-top: var(--space-5);
+  }
+}
+
+@media (max-width: bp.$mobile-max) {
+  .app {
+    padding: var(--space-4) var(--space-4) var(--space-6);
+  }
+
+  .app__title {
+    font-size: var(--font-size-xl);
+  }
+
+  .app__intro {
+    margin-bottom: var(--space-4);
+  }
+}

@@ -1,0 +1,74 @@
+@use '../../styles/breakpoints' as bp;
+
+.customer-dashboard {
+  display: grid;
+  // minmax(0, 1fr), not the implicit `auto` track: an auto track will not shrink
+  // below its widest child, so a wide table used to stretch the whole page
+  // instead of scrolling inside its own container.
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+
+  &__controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--space-5);
+    padding: var(--space-4);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  &__search {
+    flex: 1 1 18rem;
+    min-width: 0;
+  }
+
+  &__summary {
+    min-height: 1.5em;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  &__results {
+    min-height: 12rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  // Programmatic focus target only (see handleRetry); not a tab stop.
+  &__results:focus {
+    outline: none;
+  }
+}
+
+@media (max-width: bp.$tablet-max) {
+  .customer-dashboard__controls {
+    gap: var(--space-4);
+  }
+}
+
+@media (max-width: bp.$mobile-max) {
+  .customer-dashboard {
+    gap: var(--space-3);
+  }
+
+  // Stack the search and the filters in one column, full width.
+  .customer-dashboard__controls {
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--space-3);
+  }
+
+  // Cancel the 18rem flex-basis: in a column it would become a *height*.
+  .customer-dashboard__search {
+    flex: none;
+  }
+
+  .customer-dashboard__results {
+    min-height: 8rem;
+  }
+}

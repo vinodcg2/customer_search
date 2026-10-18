@@ -1,0 +1,109 @@
+@use '../../styles/breakpoints' as bp;
+
+.customer-table {
+  overflow-x: auto;
+  transition: opacity var(--transition-fast);
+
+  &--busy {
+    opacity: 0.55;
+  }
+
+  &__table {
+    width: 100%;
+    min-width: 42rem;
+    text-align: left;
+  }
+
+  &__heading {
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+  }
+
+  &__row {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  &__cell {
+    padding: var(--space-3) var(--space-4);
+    vertical-align: middle;
+    font-weight: var(--font-weight-normal);
+  }
+
+  &__cell--name {
+    font-weight: var(--font-weight-medium);
+  }
+
+  &__status {
+    display: inline-block;
+    padding: 0 var(--space-2);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+  }
+
+  &__status--active {
+    background-color: var(--color-status-active-bg);
+    color: var(--color-status-active-text);
+  }
+
+  &__status--inactive {
+    background-color: var(--color-status-inactive-bg);
+    color: var(--color-status-inactive-text);
+  }
+
+  &__status--pending {
+    background-color: var(--color-status-pending-bg);
+    color: var(--color-status-pending-text);
+  }
+}
+
+@media (max-width: bp.$tablet-max) {
+  // The table can scroll sideways from here down, so show edge shadows that
+  // appear only on a side that has more content (the classic "scroll shadow":
+  // the opaque `local` layers cover the `scroll` shadows until you scroll).
+  .customer-table {
+    background-color: var(--color-surface);
+    background-image:
+      linear-gradient(to right, var(--color-surface), var(--color-surface)),
+      linear-gradient(to left, var(--color-surface), var(--color-surface)),
+      linear-gradient(to right, rgb(16 24 40 / 22%), rgb(16 24 40 / 0%)),
+      linear-gradient(to left, rgb(16 24 40 / 22%), rgb(16 24 40 / 0%));
+    background-position: left center, right center, left center, right center;
+    background-size: 1rem 100%, 1rem 100%, 0.875rem 100%, 0.875rem 100%;
+    background-repeat: no-repeat;
+    background-attachment: local, local, scroll, scroll;
+  }
+
+  .customer-table__table {
+    min-width: 38rem;
+  }
+
+  .customer-table__heading,
+  .customer-table__cell {
+    padding: var(--space-3);
+  }
+}
+
+@media (max-width: bp.$mobile-max) {
+  // Keep a scroll gesture on the table from also triggering browser
+  // back/forward swipes.
+  .customer-table {
+    overscroll-behavior-x: contain;
+  }
+
+  .customer-table__table {
+    min-width: 36rem;
+  }
+
+  // Names, emails, statuses and dates stay on one line (readable, never
+  // squashed into a few characters per line); the container scrolls instead.
+  .customer-table__heading,
+  .customer-table__cell {
+    padding: var(--space-2) var(--space-3);
+    white-space: nowrap;
+  }
+}

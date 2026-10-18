@@ -1,0 +1,9 @@
+// GLOBAL styles only, loaded once from main.tsx.
+// Order matters: tokens -> reset -> base -> utilities.
+//
+// Component styles do NOT go here. Each component owns a stylesheet next to it
+// (e.g. components/SearchBox/SearchBox.scss) that the component imports itself.
+@use 'tokens';
+@use 'reset';
+@use 'base';
+@use 'utilities';

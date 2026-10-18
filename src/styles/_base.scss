@@ -1,0 +1,28 @@
+// Element-level defaults only. No class selectors here: those belong to
+// BEM blocks in component stylesheets.
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: var(--line-height-tight);
+}
+
+a {
+  color: var(--color-primary);
+}
+
+// A single, consistent, visible keyboard focus indicator for every
+// interactive element. Mouse clicks do not trigger :focus-visible on
+// buttons, so this does not add noise for pointer users.
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
+}

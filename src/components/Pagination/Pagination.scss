@@ -1,0 +1,54 @@
+@use '../../styles/breakpoints' as bp;
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+
+  &__button {
+    padding: var(--space-2) var(--space-4);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+  }
+
+  &__button:hover {
+    background-color: var(--color-bg);
+  }
+
+  &__button[aria-disabled='true'] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &__status {
+    min-width: 7rem;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (max-width: bp.$mobile-max) {
+  // Previous and Next share one row as equal halves; "Page X of Y" gets its own
+  // row above them. Nothing has a fixed width, so nothing can collide.
+  .pagination {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  // `order` only changes the visual position; DOM and tab order stay
+  // Previous, status, Next.
+  .pagination__status {
+    grid-column: 1 / -1;
+    order: -1;
+    min-width: 0;
+  }
+
+  .pagination__button {
+    min-height: 2.75rem;
+  }
+}
